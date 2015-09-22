@@ -20,12 +20,12 @@ object WordCount2 {
       lines.cache()
 
       val wc = lines.flatMap(allWords => allWords.split(" "))
-        .filter(filteredWords => !(filteredWords.matches(".*\\|.*") || filteredWords.startsWith("(") ||
-                                    filteredWords.startsWith(",") || filteredWords.startsWith(".") ||
-                                    filteredWords.startsWith("?")))
-        .map(word => (word, 1))
-        .reduceByKey((x,y) => x + y)
-        .sortByKey(true)
+                    .filter(filteredWords => !(filteredWords.matches(".*\\|.*") || filteredWords.startsWith("(") ||
+                            filteredWords.startsWith(",") || filteredWords.startsWith(".") ||
+                            filteredWords.startsWith("?")))
+                    .map(word => (word, 1))
+                    .reduceByKey((x,y) => x + y)
+                    .sortByKey(true)
 
       println("s******Writing output to $output**********")
       wc.saveAsTextFile(output)
