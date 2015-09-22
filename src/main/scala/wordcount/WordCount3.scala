@@ -1,4 +1,6 @@
-import org.apache.spark.{SparkContext, SparkConf}
+package wordcount
+
+import org.apache.spark.{SparkConf, SparkContext}
 
 /**
  * Created by ndharmasoth on 20-09-2015.
