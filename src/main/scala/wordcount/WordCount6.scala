@@ -34,11 +34,15 @@ object WordCount6 {
 
       val wc = input.flatMap(allwords => allwords.split(" "))
                     .filter(filteredWords => !filteredWords.matches(".*\\|.*"))
-                    .map(word => (word, 1))
-                    .reduceByKey((x, y) => x + y)
+                    //.map(word => (word, 1))
+                    //.reduceByKey((x, y) => x + y)
+                      .countByValue()
+                      .map(key_value => s"${key_value._1}, ${key_value._2}").toSeq
 
-      if(quiet == false) println(s"**********Writing output to $out******")
-      wc.saveAsTextFile(out)
+      val wc2 = sc.makeRDD(wc, 1)
+
+      if(!quiet) println(s"**********Writing output to $out******")
+      wc2.saveAsTextFile(out)
     }finally {
       sc.stop()
     }
